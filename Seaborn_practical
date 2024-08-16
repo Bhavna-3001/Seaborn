@@ -1,0 +1,39 @@
+# DATA visualization Library
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+# Note: seaborn has some built in datasets
+# total bill  vs tip datasets 
+tips = sns.load_dataset('tips')
+tips.head()
+sns.set_theme()
+# visualize the data
+sns.relplot(data=tips,x='total_bill',y='tip',col='time',hue='smoker',style='smoker',size='size')
+# iris data sets 
+iris = sns.load_dataset('iris')
+iris.head()
+#scatter plot
+sns.scatterplot(data=iris,x='sepal_length',y='petal_length',hue='species')
+sns.scatterplot(data=iris,x='sepal_length',y='petal_width',hue='species')
+
+# titanic data
+titanic = sns.load_dataset('titanic')
+titanic.head()
+sns.countplot(data=titanic,x='class')
+sns.countplot(data=titanic,x='survived')
+sns.barplot(data=titanic,x='sex',y='class',hue='survived')
+
+#diabetes data
+from sklearn.datasets import load_diabetes
+data = load_diabetes()
+df = pd.DataFrame(data.data,columns=data.feature_names)
+sns.relplot(data=df,x='age',y='bp',hue='sex')
+
+Correlation
+. Positive correlation
+. Negative Correlation
+#Heat Map
+correlation = df.corr()
+plt.figure(figsize=(10,10))
+sns.heatmap(correlation,cbar=True,square=True,fmt='.1f',annot=True,annot_kws={'size':8},cmap='Blues')
